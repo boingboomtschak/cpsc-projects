@@ -1,0 +1,2 @@
+Command line to run tests:
+g++ factorialTest.cpp factorial.cpp -lgtest -lpthread -o factorialTest

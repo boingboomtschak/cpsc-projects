@@ -1,0 +1,90 @@
+Sorting:
+  Shellsort:
+    - Algorithm
+      - Uses increments of 0.5*numElements
+      - Similar to doing several small insertion sorts, but compare in given
+        increments rather than side-by-side
+    - Original increments not very fast
+      - There are better increments
+    - Generally ends up between O(n) and O(n^2), depending upon increments
+    - Best for small amounts of data or almost sorted data
+  Heapsort:
+    - One strategy is to keep a second array, build minHeap, then do
+      deleteMin, placing each removed element into the new array
+      - Runs in O(n log(n)) time, but uses too much memory usually
+    - Better strategy is to build a max heap, remove max item, but place in
+      last element of the heap array
+    - Not stable
+    - No real shortcuts for pre-sorted data
+  Selection sort:
+    - Algorithm
+      - Find min/max of unsorted selection of array, swap into right element,
+        increment selection of array until end of array
+    - Stability
+      - Not in "raw state" but can be made more stable
+    - O(n^2)
+  Bubble sort:
+    - Algorithm
+      - Iterate through array repeatedly, swapping side-by-side until no more
+        swaps all the way through
+    - Stability
+      - Stable, only swaps when necessary
+    - O(n^2), can be more efficient on largely sorted data
+  Insertion sort:
+    - Algorithm
+      - Iterate through list, inserting min element at correct spot until end
+        of array
+    - Stable
+      - Similar to selection sort in stability
+    - O(n^2)
+  Mergesort:
+    - Recursive, divide-and-conquer algorithm
+    - General algorithm
+      - If array is size 1, done
+      - Otherwise, divide arr in half and sort each half
+      - Once halves are sorted, merge them back together
+    - Stable, items are only moved when needed
+    - However, extra memory is needed
+      - Temp array used for merging
+    - How to merge two sorted portions?
+      - Begin at same end of each and compare the values
+      - Decide which goes first, copy into temp array, then increment to
+        next value
+      - Keep comparing, copying, and incrementing until end of one portion
+        reached
+      - Copy rest of other portion into temp array
+      - Copy entire temp array into original array
+  Quicksort:
+    - Recursive, divide-and-conquer
+    - General algorithm:
+      - If 0 or 1 elements, done
+      - Pick any element and make it the pivot
+      - Divide remaining elements into two disjoint groups - one with elements
+        less than the pivot and the other with elements greater than the
+        pivot (called 'partitioning')
+      - Repeat on each group
+    - Improvements: Use 3 partition algorithm, instead of 2 partitions, or
+      choose effective pivot value
+    - Partitioning Issues:
+      - Choosing "middle" element, why not first or last
+      - Why not pick first or last element as pivot?
+        - Hurts performance a lot in partially sorted data
+      - "Median of Three" partitioning
+    - Quicksort is better at larger data sets
+      - Combine with another sorting algorithm for smaller sets
+      - Commonly paired with insertion sort for smaller arrays
+  Indirect Sorting:
+    - Sorting an array of items sometimes is not feasible if items are large
+    - Sort pointer to data and copy only when needed
+    - Only need one temp copy at any given moment
+  External Sorting:
+    - All previous sorts assume data can be held in memory
+    - What about other storage media?
+      - What is there is too much data to fit in main memory?
+    - Mergesort might be answer
+      - Fill memory with data and sort
+      - Write to disk
+      - Repeat until all portions sorted
+      - Read portions, merging portions and writing back to disk
+      - Repeat until everything sorted
+       

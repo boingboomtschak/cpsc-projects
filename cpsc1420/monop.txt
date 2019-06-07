@@ -1,0 +1,24 @@
+welcome to su monop
+you may have x-y players from across
+campus, the file x must be available
+cin ignore
+
+how many players?
+player1name
+player2name
+etc.
+cin ignore
+
+x's turn
+x rolls a [1-6] and a [1-6] for a total of [2-12]
+x landed on ___
+this property is owned by y | unowned
+x must pay [rent] to y | x can buy/rent this property for [cost]
+x now has [bal]
+x has these properties:
+would x like to forfeit? [y/n]
+cin ignore
+
+next turn
+
+## make sure program handles revolving board (dont go past # of spaces) ##

@@ -1,0 +1,91 @@
+Stacks & Queues
+
+-------------------------------------------------------------------------------
+
+Stack - operations: push, pop, isEmpty, (top?)
+Can be implemented with an array or a linked list
+First In Last Out (FILO)
+
+Examples of stacks:
+- Program Stack
+- Postfix Expression Evaluator
+  4 5 7 2 + - *
+  vs. Infix EE
+  4 * (5 - (7 + 2))
+
+Stack class:
+- Big 4
+  - Constructor: Allocate memory for array, set variables
+  - Copy Constructor: Allocate memory for array, set variables based on
+                      other object
+  - Overloaded Assignment Operator: Copies values from right hand side to left
+                                    hand side (may need to deallocate/allocate
+				    memory)
+  - Destructor: Deallocates memory
+- Decide whether top at arr[0] or arr[-1] when stack is empty
+- push: Adds new value to array, updates top
+- pop: Returns top value and removes it, updates top
+- isEmpty: Returns a bool, [return top == 0; OR return top == -1;]
+- Dynamic array implementation
+
+-------------------------------------------------------------------------------
+
+Queue - operations: enqueue, dequeue, isEmpty, (front?)
+Can be implemented with an array or a linked list
+First In First Out (FIFO)
+
+Examples of queues:
+- Print queue
+- A line (first person there gets served first)
+
+Queue Class:
+- Big 4
+  - Constructor: Set head/tail to null(ptr), size (for dynamic arrays)
+  - Copy Constructor: Copy linked list
+  - Overloaded Assignment Operator: Delete and copy linked list
+  - Destructor: Deallocates all nodes
+- Keep track of head and tail
+- Node struct in class is private (for linked lists)
+- enqueue: Adds node at tail
+- dequeue: Removes node from head (deallocates node)
+- isEmpty: Front null? (return head == nullptr)
+- Linked list implementation
+
+-------------------------------------------------------------------------------
+
+Stacks: Resizing stack
+Queues: Copying a linked list
+Both: Exception Handling
+
+Stack: full - on next push, resize
+       empty - on pop?
+         int pop();
+         // if empty, throw an exception
+         In stack.h:
+         class EmptyStack{};
+         In pop:
+         throw EmptyStack();
+         In main:
+         try{
+           s.pop();
+         }catch(Stack::EmptyStack){
+           cout << "Error! \n";
+         }
+       -- OR -- 
+         bool pop(int& val); 
+         // if empty, return false
+
+Queue: empty - on dequeue?
+         int dequeue();
+       	 // if empty, throw an exception
+	 In queue.h:
+	 class EmptyQueue{};
+	 In dequeue:
+	 throw EmptyQueue();
+	 In main:
+	 try{
+           q.dequeue();
+	 }catch(Queue::EmptyQueue){
+           cout << "Error! \n";
+	 }
+	 

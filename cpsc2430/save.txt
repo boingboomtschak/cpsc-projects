@@ -1,0 +1,7 @@
+void print(Node* h, ostream& outs)
+{
+  outs << "test";
+}
+
+print(list, cout);
+print(list, outfile);

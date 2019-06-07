@@ -1,0 +1,2 @@
+Command line to run tests:
+g++ FractionTest.cpp Fraction.cpp -lgtest -lpthread -o FractionTest
