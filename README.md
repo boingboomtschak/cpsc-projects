@@ -1,2 +1,2 @@
-# cpsc-2018-2019
-Projects written for Computer Science classes for the 2018-2019 year.
+# cpsc-projects
+Archive for projects, labs, and code written for Computer Science classes.

@@ -1,0 +1,66 @@
+//// Each team member's name and contributions ////////////
+...
+
+Project was completed alone by Devon McKee.
+
+//// My own rating on the functionality ///////////////////
+Rating: A, B, C, D, or F?
+Explanation: 
+...
+
+I think my overall rating of the functionality would be an A. All of the functionality works in the test cases given and in my own test cases within normal limits.
+-
+
+//// Test cases ///////////////////////////////////////////
+Test case #1: mkdir abc
+Results: 
+...
+
+Test case #1: mkdir dir1 && ls 
+Results: 
+SUCCESS
+SUCCESS
+dir1/
+
+Test case #2: mkdir dir1 && create file1 && ls 
+Results:
+SUCCESS
+SUCCESS
+SUCCESS
+dir1/ file1
+
+Test case #3: mkdir dir1 && cd dir1 && create file1 && home && cd dir1 && ls
+SUCCESS
+SUCCESS
+SUCCESS
+SUCCESS
+SUCCESS
+SUCCESS
+file1
+
+Test case #4: create file1 && append file1 hello... && append file1 world! && cat file1
+SUCCESS 
+SUCCESS
+SUCCESS
+SUCCESS 
+hello...world!
+
+Test case #5: create file1 && stat file1
+SUCCESS
+Inode block: 2
+Bytes in file: 0
+Number of blocks: 0
+First block: 0
+
+Test case #6: create file1 && append file1 helloworld! && head file1 5
+SUCCESS
+SUCCESS
+hello
+
+Test case #6: mkdir dir1 && create file1 && ls && rmdir dir1 && rm file1 && ls
+SUCCESS
+SUCCESS
+dir1/ file1
+SUCCESS
+SUCCESS
+SUCCESS

@@ -1,0 +1,19 @@
+--- CPSC3500 Project #2 (Homework #3) ---
+--- Shell with Piped Redirection --------
+--- By Devon McKee ----------------------
+--- January 20, 2021 --------------------
+
+Project completed individually.
+
+Strengths of my shell:
+	- Handles piped commands correctly, passing stdin/stdout between commands as needed to feed output from one command to the input of the next.
+	- Cleans up all memory allocated in both child and parent processes. In the child process, memory is allocated, but since execvp() is called and the process image is overwritten, the OS performs the work of cleaning up heap memory associated with it. 
+	- Utilizes program defines well to both set maximums and define control characters (MAX_COMMANDS, MAX_COMMAND_TOKENS, MAX_TOKEN_LENGTH, PIPE_DELIM), so they can be changed as needed during development.
+
+Weaknesses of my shell:
+	- I chose to learn C in this class rather than use C++ as I'm not the biggest fan, so while my code may seem "clean" or well-built to me, it may not seem so to someone more versed in C. At the very least, I can hope it's feasibly readable, memory-safe, and efficient.
+	- While the piped commands work as intended, the shell doesn't actually directly pass stdin to the first command in the set - I think this should still work as intended as stdin is obviously the default reading file descriptor at that point, but I could be wrong.
+	- Even though it's out of the scope of the project, it's hard both not being able to use the left or right arrow keys to scroll back in my current line to fix a typo, or being able to use the up or down arrows to access command history.
+
+Bonus strengths of my shell:
+	- Allocates memory for the command's input buffer and then for the char ** to store token locations, but the command string is never copied. Rather, pointers are kept to locations in the string as it should not need to be modified in the scope of this project, so it handles memory efficiently.

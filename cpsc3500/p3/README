@@ -1,0 +1,41 @@
+Assignment: 
+    Project 3; Parallel Zip (pzip)
+
+Author: 
+    Devon McKee
+
+Class/Section: 
+    CPSC-3500-01
+
+Design Considerations (Section 1.2):
+    How to parallelize the compression?
+        My pzip program breaks up individual files into "blocks" as offset pointers to the file mapped in memory. This way, multiple consumer threads can work on the file and compress it, without 
+    
+    How to determine how many threads to create?
+        Since production happens in the main thread, my program creates number of configured processors - 1 to process blocks as they are distributed. 
+    
+    How to efficiently perform each piece of work?
+        As soon as a thread accesses a block, it releases the block mutexes as soon as possible so that it can calculate the run lengths for that block. Then, it writes to an internal buffer (allocated at thread creation) so it does not require mutex lock of stdout to process the block.
+    
+    How to access the input file efficiently?
+        My program uses mmap to map the entire file into memory, then I can pass pointers to specific parts of it and process it individually.
+    
+    How to coordinate multiple threads?
+        For coordinating block input to threads, there are two mutexes (breadx, bwritex) for the current block. These lock writes and reads to the block so the main thread and consuming thread can have exclusive access to the block. When the main thread is finished writing a block, the consumer thread that is next up will see that the read lock is unlocked, consume the block, then release it back for writing.
+
+        To ensure files are not unmapped from memory before threads are done using them, there is an open_threads semaphore that counts the number of threads currently accessing the block. The main thread sleeps until each block has been processed, then unmaps the current file and maps the next file.
+
+        Since the current block requires a global integer whose value needs to be compared and assigned, I used an atomic integer for block_cur, which ensures threads should only take one instruction to operate on it and thus should be thread-safe.
+
+        For coordinating output to stdout, each block is assigned a block number, and threads attempt to gain the mutex lock for stdout when they have a block ready. If their block isn't the block currently up, they release the lock for another thread. After pushing their block to the buffer, they return to waiting for new blocks until they get the signal to shut down and clean up memory.
+
+Strengths and Weaknesses:
+    Strengths:
+        - Utilizes a persistent thread pool that uses as many or as few threads are needed.
+        - Threads output when they are both ready and their block is called, so the output is synchronized and in the right order, so writes to stdout can occur before the main thread is finished passing out blocks.
+        - Files are moved in and out of memory using the mmap() and munmap() system calls, which allows for fast reading of the file into memory, and then allows threads to access different portions of the file at once.
+        - Configurable block sizes (defined in the source file), though I've found 16,384 byte blocks to be the most efficient on both my local machine and in testing on cs1.
+    Weaknesses:
+        - Right now, I am having a minor bug with the binary format of the resulting file, where certan uint32_t writes are the wrong number when the run is of spaces (if there are 6 spaces, it writes 04 00 00 00 20 instead of 06 00 00 00 20). I'm not using any calls that would try to apply extra formatting and skip whitespace, so this is a confusing bug.
+        - As the implementation is set up right now, the blocks are not set to be queued up, rather the "block ready" mutex unlocks, and the first thread to grab the block consumes the pointer and block size/number.
+        - There are some minor memory issues (1638 bytes still reachable, not lost) that appears to be a valgrind bug that is reported as fixed (https://stackoverflow.com/questions/1542457/memory-leak-reported-by-valgrind-in-dlopen/3649846). The bug is reported as fixed, but it still shows up on both my local (Ubuntu) machine and cs1, both of which have updated valgrind implementations. However, these blocks are still reachable and should be released by the OS after the threads exit.

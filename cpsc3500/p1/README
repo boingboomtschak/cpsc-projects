@@ -1,0 +1,11 @@
+--- CPSC 3500 Homework Assignment 1 ---
+--- By Devon McKee --------------------
+Parts of Project:
+	wcat: Tested with a variety of text files, encountered no issues or differences from UNIX's cat command that aren't already mentioned in the assignment specification. Minor output changes from UNIX's cat command when printing binary files, but that may be because of the presence of null characters (and is out of the scope of this assignment)
+
+	wgrep: Tested with a variety of text files, encountered no issues or differences from UNIX's grep command that aren't already mentioned in the assignment specification.
+
+	wzip: Tested with a variety of text files, confirmed correct binary format using the hexdump utility, and results were as expected. 
+
+	wunzip: Tested with a variety of binary files, confirmed correct format when unzipping, and no major bugs found.
+
