@@ -1,0 +1,9 @@
+f x f y i a i b
+x = 1.39
+y = 3.29
+a = 4
+b = 5
+x = x + y
+a = b + 2
+p x 
+p a

@@ -1,0 +1,63 @@
+
+// ==========================================================================
+//  GPLEX error listing for lex source file <Project1.Language.analyzer.lex>
+// ==========================================================================
+//  Version:  1.2.2
+//  Machine:  DESKTOP-VALOV96
+//  DateTime: 4/13/2017 5:35:34 PM
+//  UserName: Richard LeBlanc
+// ==========================================================================
+
+
+%namespace Project1
+%scannertype Scanner
+%visibility internal
+%tokentype Token
+%using static Project1.PToken;
+//------------^^^^^^^^
+// Error: Unexpected symbol, skipping to  <%%> 
+// Error: Parser error <Syntax error, unexpected csIdent, expecting .> 
+// --------------------------------------------------------------------
+
+%option stack, minimize, parser, verbose, persistbuffer, noembedbuffers, noparser
+
+
+LineTerminator	(\r\n?|\n)
+InputCharacter	[^\r\n]
+WhiteSpace	({LineTerminator}|[ \t\f])
+Slash	[/]
+Minus	[\-]
+NotSlashMinus	[^/\-]
+
+/* The following code is emitted in the generated class
+ *   You should use it when you find something interesting
+ */
+%{
+	public void found(string s)
+	{
+	Console.WriteLine(String.Format("Found |{0}| from text ->> {1}", s, yytext));
+	}
+%}
+
+%%
+
+/* Finally, patterns of interest and what to do
+ *   upon finding them
+ */
+
+
+"hello"			{ found("greeting"); return(1);  }
+("0"|"1")+		{ found("binary integer:");return(2);   }
+"o"[a-z]+		{ found("word starting with 'o'"); }
+Whitespace+		{ /* delete blanks */ }
+f				{ return(FLOATDECL); }
+i				{ return(INTDECL); }
+p 				{ return(PRINT); }
+[a-eghj-oq-z]	{ return(ID); }
+([0-9]+)|([0-9]+"."[0-9]=)	{return(NUM);}
+"="				{ return(EQUAL); }
+"+"				{ return(PLUS); }
+"-"				{ return(MINUS); }
+
+%%// ==========================================================================
+

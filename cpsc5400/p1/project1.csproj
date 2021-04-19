@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{01E925B2-2E3D-4BE8-99EC-83E92AE49CE3}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Project1</RootNamespace>
+    <AssemblyName>Project1</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Label="YltParsers">
+    <Names>Project1</Names>
+  </PropertyGroup>
+  <PropertyGroup Label="YltProperties">
+    <YltTools>$(SolutionDir)packages\YaccLexTools.0.2.2\tools\</YltTools>
+    <GplexTool>"$(YltTools)gplex.exe"</GplexTool>
+    <GppgTool>"$(YltTools)gppg.exe"</GppgTool>
+  </PropertyGroup>
+  <PropertyGroup Label="GenerateProject1Properties">
+    <Project1Parser>$(ProjectDir)Project1</Project1Parser>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Project1.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GplexBuffers.cs" />
+    <Compile Include="Parser.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Project1Scanner.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="TokenStream.cs" />
+    <!-- <Compile Include="ShiftReduceParserCode.cs" /> -->
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="Project1Files">
+    <!--
+    <Compile Include="Project1.Parser.cs">
+      <DependentUpon>Project1.parser</DependentUpon>
+    </Compile>
+    <Compile Include="Project1.Parser.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Project1.Language.grammar.y</DependentUpon>
+    </Compile>
+    -->
+    <Compile Include="Project1.Scanner.Generated.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Project1.Language.analyzer.lex</DependentUpon>
+    </Compile>
+    <None Include="Project1.Language.analyzer.lex">
+      <DependentUpon>Project1.parser</DependentUpon>
+    </None>
+    <!--
+    <None Include="Project1.Language.grammar.y">
+      <DependentUpon>Project1.parser</DependentUpon>
+    </None>
+    -->
+    <None Include="Project1.parser" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="acTestFile.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="BeforeBuild" DependsOnTargets="YltBuildGen" />
+  <Target Name="YltBuildGen" DependsOnTargets="GenerateProject1" />
+  <Target Name="GenerateProject1" Inputs="$(Project1Parser).Language.analyzer.lex" Outputs="$(Project1Parser).Scanner.Generated.cs">
+    <Message Text="Generating scanner for $(Project1Parser) ..." />
+    <Exec Command="$(GplexTool) &quot;/out:$(Project1Parser).Scanner.Generated.cs&quot; &quot;$(Project1Parser).Language.analyzer.lex&quot;" WorkingDirectory="$(ProjectDir)" Outputs="$(GenDir)Scanner.cs">
+      <Output TaskParameter="Outputs" ItemName="Project1Scanner" />
+    </Exec>
+    <!-- commenting out gppg since we don't need it
+    <Message Text="Generating parser for $(Project1Parser) ..." />
+    <Exec Command="$(GppgTool) /no-lines /gplex &quot;$(Project1Parser).Language.grammar.y&quot; &gt; &quot;$(Project1Parser).Parser.Generated.cs&quot;" WorkingDirectory="$(ProjectDir)" Outputs="$(Project1Parser).Parser.Generated.cs">
+      <Output TaskParameter="Outputs" ItemName="Project1" />
+    </Exec> -->
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

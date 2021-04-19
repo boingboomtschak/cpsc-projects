@@ -1,0 +1,12 @@
+C:\Users\Richard LeBlanc\Dropbox\CPSC 4400\studio3\bin\Debug\Studio3.exe.config
+C:\Users\Richard LeBlanc\Dropbox\CPSC 4400\studio3\bin\Debug\Studio3.exe
+C:\Users\Richard LeBlanc\Dropbox\CPSC 4400\studio3\bin\Debug\Studio3.pdb
+C:\Users\Richard LeBlanc\Dropbox\CPSC 4400\studio3\obj\Debug\studio3.csprojResolveAssemblyReference.cache
+C:\Users\Richard LeBlanc\Dropbox\CPSC 4400\studio3\obj\Debug\Studio3.exe
+C:\Users\Richard LeBlanc\Dropbox\CPSC 4400\studio3\obj\Debug\Studio3.pdb
+C:\Users\Richard LeBlanc\Downloads\studio3\bin\Debug\Studio3.exe.config
+C:\Users\Richard LeBlanc\Downloads\studio3\bin\Debug\Studio3.exe
+C:\Users\Richard LeBlanc\Downloads\studio3\bin\Debug\Studio3.pdb
+C:\Users\Richard LeBlanc\Downloads\studio3\obj\Debug\Studio3.exe
+C:\Users\Richard LeBlanc\Downloads\studio3\obj\Debug\Studio3.pdb
+C:\Users\Richard LeBlanc\Downloads\studio3\obj\Debug\studio3.csprojResolveAssemblyReference.cache
